@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const config = {
   entry: { main: './src/index.js' },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     filename: '[name].[hash].bundle.js'
   },
   module: {
@@ -39,7 +39,7 @@ const config = {
     }),
     // clean dist folder for unused files
     // dist 폴더에서 안쓰는 파일은 생성 안 하도록 해주는 플러그인
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['public']),
     // enable hot module replacement
     new MiniCssExtractPlugin({
       filename: 'main.[hash].css'
