@@ -1,0 +1,117 @@
+// import mixins.sass file
+@import mixins
+
+*, *::before, *::after
+  box-sizing: border-box
+
+body
+  overflow-x: hidden
+  font-family: sans-serif
+
+// 헤더 역역
+.header-room
+  width: 100%
+  height: 56px
+  @include paddingVAC(56px, 16px)
+  background: #fafafa
+  
+  .category
+    font-size: 16px
+    text-align: center
+
+// 모바일 네비게이션
+.main-nav
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100%
+  height: 52px
+  background: #333
+
+  .main-nav-wrapper
+    display: flex
+    flex-flow: row nowrap
+    
+    .main-nav-list
+      flex: 1 0
+      height: 52px
+      background: #aaa
+      &:nth-child(3)
+        flex: 0 1 52px
+      
+      .main-nav-profile
+        background: red
+
+      .main-nav-create
+        background: #fff
+
+      .main-nav-mychat
+        background: blue
+      
+      .selectarea
+        display: block
+        width: 100%
+        height: 100%
+
+// 채팅 방 리스트 영역
+.roomlist
+  width: 100%
+  padding: 16px
+
+  .roomlist-list
+    width: 100%
+    height: auto
+    background: #fff
+    border: 1px solid #eee
+
+    .selectarea
+      display: block
+      width: 100%
+      height: auto
+      padding: 16px
+    
+    .roomlist-title
+      margin-bottom: 8px
+      font:
+        size: 15px
+        weight: bold
+    
+    .info
+      display: flex
+      flex-flow: row nowrap
+      justify-content: space-between
+      margin-bottom: 10px
+
+      .info-details
+        display: flex
+        font-size: 12px
+      
+      .info-username
+          font-weight: bold
+          margin-right: 6px
+          &::after
+            content: '|'
+            font-weight: normal
+            padding-left: 6px
+      
+      .info-members
+        font-size: 12px
+        .members__is-active
+          font-weight: bold
+          &::after
+            content: '/'
+            font-weight: normal
+            padding-right: 2px
+
+    .info-desc
+      width: 100%
+      overflow: hidden
+      font-size: 14px
+      line-height: 1.25
+
+.a11y-hidden
+  position: absolute
+  width: 1px
+  height: 1px
+  overflow: hidden
+  clip: rect(1px,1px,1px,1px)
