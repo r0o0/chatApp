@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,71 @@
   <title>A Community Chat App</title>
   <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.chunks.main.css %>">
 </head>
+
 <body>
-  <h1 class="test">Webpack up and running :) Yay!!</h1>
+  <header class="header-room">
+    <h1 class="category">Design</h1>
+  </header>
+  <nav class="main-nav">
+    <ul class="main-nav-wrapper">
+      <li class="main-nav-list">
+        <a class="main-nav-home selectarea" href="#home">
+          <span class="a11y-hidden">ChatApp</span>
+        </a>
+      </li>
+      <li class="main-nav-list">
+        <a class="main-nav-profile selectarea" href="#profile">
+          <span class="a11y-hidden">Profile</span>
+        </a>
+      </li>
+      <li class="main-nav-list">
+        <a class="main-nav-create selectarea" href="#create">
+          <span class="a11y-hidden">Create Room</span>
+        </a>
+      </li>
+      <li class="main-nav-list">
+        <a class="main-nav-mychat selectarea" href="#mychat">
+          <span class="a11y-hidden">My Chat</span>
+        </a>
+      </li>
+      <li class="main-nav-list">
+        <a class="main-nav-search selectarea" href="#search">
+          <span class="a11y-hidden">Search</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <main class="roomlist">
+    <ul class="roomlist-wrapper">
+      <li class="roomlist-list">
+        <a class="selectarea">
+          <h2 class="roomlist-title">Title</h2>
+          <div class="info">
+            <div class="info-details">
+              <p class="info-username">Username</p>
+              <small class="info-posttime">
+                <time datetime="2018-07-04T00:00:00Z">5secs
+                  <span class="a11y-hidden">posted 5 seconds ago</span>
+                </time>
+              </small>
+            </div>
+            <div class="info-members">
+              <strong class="members__is-active">3
+                <span class="a11y-hidden">active</span>
+              </strong>120
+              <span class="a11y-hidden">members</span>
+            </div>
+          </div>
+          <p class="info-desc">
+            This is a brief description of a chat room blablablablablablablablablablablablablablablablablabla
+          </p>
+        </a>
+      </li>
+    </ul>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
-  <script src="./.hoodie/client.js"></script>
+  <script src="./hoodie/client.js"></script>
 </body>
+
 </html>
