@@ -3,9 +3,9 @@ import Render from './Render';
 
 // Router 생성
 class Router extends Render {
-  constructor(app) {
+  constructor(target) {
     super(),
-    this.app = app,
+    this.app = target,
     this.routes = [],
     this.pages = {},
     this.hashChange = this.hashChange.bind(this);
@@ -15,49 +15,34 @@ class Router extends Render {
   }
   addRoute(name, url) {
     this.routes.push({ name, url });
-    // console.log('all routes', this.routes);
   }
   hashChange() {
     const hash = window.location.hash;
-    console.log('current hash', hash);
-    const routes = this.routes;
-    console.log('all routes',routes);
-    console.log('all components', this.components);
-  
-    for ( const index in routes) {
-      const route = routes[index];
+    const page = this.toRender(hash);
+    const to_render = page.view;
     
-      if (`#${route.name}` === hash) {
+    `#${to_render}` === hash ? super.showComponent(page) : super.showComponent(404);
+  }
+  toRender(url) {
+    const routes = this.routes;
+    let render = this.view;
+    for (const index in routes) {
+      const route = routes[index];
+
+      if (`#${route.name}` === url) {
         for (const index in this.pages) {
           const page = this.pages[index];
 
-          if (`#${page.view}` === hash) {
-            this.view = page;
-            // this.components = page.components;
+          if (`#${page.view}` === url) {
+            render = page;
+            console.log('which', render);
           }
         }
-        console.log('true', this.view);
-     
       }
     }
-
-    if (`#${this.view.view}` === hash) {
-      console.log('yes');
-      // const renderPage = '#' + this.view.view;
-      super.showComponent(this.view);
-    } else {
-      super.showComponent(404);
-    }
-  
-
-    // if (hash !== `#${routes.name}`) {
-      // console.log(routes);    
-    // }
-    // console.log(this.routes);
+    return render;
   }
 }
-
-// console.log(new Router);
 
 export default Router;
 
