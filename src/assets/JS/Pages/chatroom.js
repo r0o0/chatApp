@@ -21,8 +21,8 @@ home.addComponent({
   html: chatlist()
 })
 
-const router = new Router(home);
-router.addRoute('home', '^#/home$');
-console.log('route', router.routes[0].url);
+// const router = new Router(home);Router.addRoute
+// router.addRoute('home', '^#/home$');
+// console.log('route', router.routes[0].url);
 
-export default { home, router };
+export default home;

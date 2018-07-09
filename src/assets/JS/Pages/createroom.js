@@ -11,8 +11,8 @@ create.addComponent({name: 'header', html: header()});
 
 // create.addComponent({name: 'chatlist', html: chatlist()})
 
-const router = new Router(create);
-router.addRoute('create', '^#/create$');
+// const createRouter = new Router(create);
+// createRouter.addRoute('create', '^#/create$');
 // console.log('route', router.routes[0].url);
 
 export default create;
