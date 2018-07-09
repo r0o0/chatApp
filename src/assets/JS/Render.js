@@ -1,33 +1,51 @@
 class Render {
   constructor(target, view) {
-    console.log('test');
     this.app = document.querySelector(target);
-    this.view = view; 
+    this.view = view;
     this.components = {};
   }
   addComponent(component) {
     this.components[component.name] = component;    
+    // console.log('add', this.components);
   }
-  showComponent() {
+  showComponent(view) {
+    const hash = window.location.hash;
+    // console.log('render hash', hash);
     const content = [];
-    this.render = this.components;
-    for (let component in this.components) {
-        content.push(this.render[component].html);
-    }
+    // this.render = this.components;
     
-    this.updateView(content.join('')); 
+    console.log('view',view);
+    if (`#${view.view}` === hash) {
+      console.log('render test', view.components);
+      console.log('this comp', this.components);
+      // console.log('showComp renders', this.components);
+      for (let component in view.components) {
+        content.push(view.components[component].html);
+        // console.log('content storage', this.components[component]);
+      }
+      console.log(content);
+      this.updateView(content.join('')); 
+      // this.render = {};
+      // console.log('showComp render', this.components);
+    } else if (view === 404) {
+      this.updateView('<h3>404 Page Not Found</h3>');
+    } 
   }
-  updateView(component) {
-    if(this.render) {
-      // console.log('updateView', typeof component);
-      // console.log('update.html', this.app.innerHTML);
-      this.app.innerHTML = component;
-      this.render = {};
-      console.log(this.render);
+  updateView(content) {
+    const hash = window.location.hash;
+    console.log(hash);
+    console.log('update', content);
+    // console.log(component);
+    if(content) {
+      this.app.innerHTML = content;      
+      // console.log('updateView render', this.render);
     } else {
-      this.app.innerHTML = '<h3>404 Page Not Found</h3>';
+      console.log('no content');
+      // console.log('updateView.else', component);
     }
   }
 }
 
-export default Render;
+// console.log('Render class', new Render);
+
+export default Render;  

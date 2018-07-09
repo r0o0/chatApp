@@ -1,39 +1,63 @@
+import Render from './Render';
 'use strict';
 
 // Router 생성
-class Router {
+class Router extends Render {
   constructor(app) {
+    super(),
     this.app = app,
-    this.routes = []
+    this.routes = [],
+    this.pages = {},
     this.hashChange = this.hashChange.bind(this);
 
-    window.addEventListener('hashChange', this.hashChange);
+    window.addEventListener('hashchange', this.hashChange);
     window.addEventListener('DOMContentLoaded', this.hashChange);
   }
   addRoute(name, url) {
     this.routes.push({ name, url });
-    console.log('all routes', this.routes);
+    // console.log('all routes', this.routes);
   }
-  hashChange() {  
+  hashChange() {
     const hash = window.location.hash;
-    console.log('hash', hash);
+    console.log('current hash', hash);
     const routes = this.routes;
+    console.log('all routes',routes);
+    console.log('all components', this.components);
   
-    for ( let index in routes) {
+    for ( const index in routes) {
       const route = routes[index];
-      console.log('Router route',route);
+    
       if (`#${route.name}` === hash) {
-        console.log('route.name', route.name);
-        console.log('hash');
-        this.app.showComponent(route.name);
-      } else {
-        console.log('none');
-        this.app.showComponent();
+        for (const index in this.pages) {
+          const page = this.pages[index];
+
+          if (`#${page.view}` === hash) {
+            this.view = page;
+            // this.components = page.components;
+          }
+        }
+        console.log('true', this.view);
+     
       }
     }
-    console.log(this.routes);
+
+    if (`#${this.view.view}` === hash) {
+      console.log('yes');
+      // const renderPage = '#' + this.view.view;
+      super.showComponent(this.view);
+    } else {
+      super.showComponent(404);
+    }
+  
+
+    // if (hash !== `#${routes.name}`) {
+      // console.log(routes);    
+    // }
+    // console.log(this.routes);
   }
 }
+
+// console.log(new Router);
 
 export default Router;
 
