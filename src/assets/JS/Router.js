@@ -1,15 +1,16 @@
 import Render from './Render';
 'use strict';
 
-// Router 생성
+// Router 객체 생성
+// base class: Render
 class Router extends Render {
   constructor(target) {
     super(),
-    this.app = target,
-    this.routes = [],
-    this.pages = {},
-    this.hashChange = this.hashChange.bind(this);
-
+      this.app = document.querySelector(target),
+      this.routes = [],
+      this.pages = {},
+      this.hashChange = this.hashChange.bind(this);
+  
     window.addEventListener('hashchange', this.hashChange);
     window.addEventListener('DOMContentLoaded', this.hashChange);
   }
@@ -18,31 +19,28 @@ class Router extends Render {
   }
   hashChange() {
     const hash = window.location.hash;
-    const page = this.toRender(hash);
-    const to_render = page.view;
-    
-    `#${to_render}` === hash ? super.showComponent(page) : super.showComponent(404);
+    let page = this.toRender(hash);
+    console.log('hash1', page);
+    typeof page === 'object' ? super.showComponent(page) : super.showComponent(404);
+    console.log('hash2', page);
   }
   toRender(url) {
-    const routes = this.routes;
     let render = this.view;
-    for (const index in routes) {
-      const route = routes[index];
+    console.log('all', this.routes);
+    for (const index in this.routes) {
+      const route = this.routes[index];
 
       if (`#${route.name}` === url) {
         for (const index in this.pages) {
           const page = this.pages[index];
-
           if (`#${page.view}` === url) {
-            render = page;
-            console.log('which', render);
+            return render = page;
           }
         }
       }
     }
-    return render;
   }
 }
 
-export default Router;
 
+export default Router;
