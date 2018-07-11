@@ -1,51 +1,36 @@
+// Rendering object
+'use strict';
+
 class Render {
-  constructor(target, view) {
-    this.app = document.querySelector(target);
-    this.view = view;
+  constructor(page) {
+    this.view = page;
     this.components = {};
   }
   addComponent(component) {
-    this.components[component.name] = component;    
-    // console.log('add', this.components);
+    this.components[component.name] = component;
   }
-  showComponent(view) {
+  showComponent(page) {
     const hash = window.location.hash;
-    // console.log('render hash', hash);
     const content = [];
-    // this.render = this.components;
-    
-    console.log('view',view);
-    if (`#${view.view}` === hash) {
-      console.log('render test', view.components);
-      console.log('this comp', this.components);
-      // console.log('showComp renders', this.components);
-      for (let component in view.components) {
-        content.push(view.components[component].html);
-        // console.log('content storage', this.components[component]);
+    console.log('show', typeof page);
+    if (`#${page.view}` === hash) {
+      for (let component in page.components) {
+        content.push(page.components[component].html);
       }
-      console.log(content);
-      this.updateView(content.join('')); 
-      // this.render = {};
-      // console.log('showComp render', this.components);
-    } else if (view === 404) {
+      this.updateView(content.join(''));
+    } else {
+      console.log(page, '404');
       this.updateView('<h3>404 Page Not Found</h3>');
-    } 
+    }
   }
   updateView(content) {
-    const hash = window.location.hash;
-    console.log(hash);
     console.log('update', content);
-    // console.log(component);
-    if(content) {
-      this.app.innerHTML = content;      
-      // console.log('updateView render', this.render);
-    } else {
-      console.log('no content');
-      // console.log('updateView.else', component);
-    }
+    content ? 
+      this.app.innerHTML = content : 
+      console.error('need content to update view');
   }
 }
 
-// console.log('Render class', new Render);
+console.log('Render class', typeof new Render);
 
-export default Render;  
+export default Render;
