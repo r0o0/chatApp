@@ -5,7 +5,7 @@ import Hoodie from '../.hoodie/client';
 import Router from './assets/JS/Router';
 
 // Pages
-import create from './assets/JS/Pages/createroom';
+import { create, store } from './assets/JS/Pages/createroom';
 import home from './assets/JS/Pages/chatroom';
 
 // CSS
@@ -27,3 +27,9 @@ console.log('hoodie', Hoodie);
   // 라우터의 pages 속성에 render할 페이지들 참조
   router.pages = { home, create };
 })();
+
+// store function loads and document.querySelector .app innerHTML works
+window.addEventListener('DOMContentLoaded', store);
+
+
+
