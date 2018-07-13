@@ -5,8 +5,8 @@ import Render from '../Render';
 
 const home = new Render('home');
 
-home.addComponent({name: 'header', html: header()});
-home.addComponent({name: 'nav', html: nav()});
-home.addComponent({name: 'chatlist', html: chatlist()});
+home.add({name: 'header', html: header()});
+home.add({name: 'nav', html: nav()});
+home.add({name: 'chatlist', html: chatlist()});
 
 export default home;
